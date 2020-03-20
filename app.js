@@ -64,13 +64,21 @@ app.post("/compose", function(req, res) {
 
 // Routing parameters for post_title
 app.get("/posts/:postName", function(req, res) {
+  
   let requestedTitle = _.lowerCase(req.params.postName);
 
   // For loop for taking postTitle from compose page
   posts.forEach(function(post) {
+
     const storedTitle = _.lowerCase(post.title);
+
     if (storedTitle == requestedTitle) {
-      console.log(" match found ");
+
+      res.render("post" , {
+        title : post.title ,
+        content : post.content
+      });
+
     } else {
       console.log(" match not found");
     }
